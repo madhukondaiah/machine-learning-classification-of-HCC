@@ -1,0 +1,43 @@
+{% extends 'index.html' %}
+
+
+{% block content %}
+ <div class="container-xxl py-5" >
+    <div class="container" style="min-height: 400px;margin-top: 70px;">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" >
+                <div class="position-relative h-100">
+                    <img class="/static/img-fluid position-absolute w-100 h-100" src="/static/img/imgs (3).webp" alt=""
+                        style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                <h6 class="section-title bg-white text-start pe-3"style=' color: rgb(0, 185, 241);'>About Us</h6>
+                <h1 class="mb-4">Welcome to <span style="color: rgb(0, 185, 241);">Project</span></h1>
+                <p class="mb-4">This project reviews traditional diagnostic methods for hepatocellular c
+                    arcinoma (HCC) and explores the integration of artificial intelligence (AI) techniques, 
+                    including machine learning (ML) and deep learning (DL), to enhance early diagnosis. 
+                   </p>
+                <p class="mb-4"> By comparing approaches like decision trees (DT), random forests (RF), logistic regression (LR), and stacking classifiers, the project highlights the potential of AI in analyzing cancer-related databases, histopathology, radiology, biomarkers, and electronic health records (EHRs) to 
+                    improve diagnostic accuracy and speed.
+                </p>
+                <div class="row gy-2 gx-4 mb-4">
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Hepatocellular Carcinoma (HCC)</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Machine Learning (ML)</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Diagnostic Approaches</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right text-primary me-2"></i>Histopathology</p>
+                    </div>            
+                </div>
+                <a class="btn py-3 px-5 mt-2" style="background-color: rgb(0, 185, 241);color: black;" href="">Read More</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

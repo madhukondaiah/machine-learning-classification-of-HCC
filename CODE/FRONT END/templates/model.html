@@ -1,0 +1,48 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<!-- Booking Start -->
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container" style="min-height: 100%; margin-top: 70px; height: 500px; width: 2000px;">
+        <div class="booking1 p-5">
+            <div class="row g-5 align-items-center">
+                <div class="col-md-12 d-flex justify-content-center">
+
+                    <form action="{{url_for('model')}}" method="post" enctype="multipart/form-data">
+                        <center>
+
+                            <div class="caption header-text" style="background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 15px;">
+                                <h1 style="color: rgb(0, 0, 0); font-weight: bold; margin-top: 100px;">Model Training</h1>
+                                {% if msg %}
+                                <h2 style="color: rgb(0, 0, 0); font-weight: bolder; margin-top: 15px;">{{msg}}</h2>
+                                {% endif %}
+                            </div>
+
+                            <div style="margin-top: 30px;">
+                                <select class="form-select" name="algo"
+                                    style="width: 430px; background-color: #0f81eb60; color: black; height: 50px; border-radius: 12px; font-weight: bold; text-align: center;">
+                                    <option value="0">Select an Algorithm</option>
+                                    <option value="1">Decision tree</option>
+                                    <option value="2">Random Forest Classifier</option>
+                                    <option value="3">Logistic Regression</option>
+                                    <option value="4">Stacking Classifier</option>
+                                </select>
+                            </div>
+                        </center>
+                        <center>
+                            <div style="margin-top: 30px;">
+                                <button type="submit"
+                                    style="width: 150px; border-radius: 20px; background-color: #0f81eb60; color: black; height: 50px; font-weight: bold;">
+                                    Submit
+                                </button>
+                            </div>
+                        </center>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

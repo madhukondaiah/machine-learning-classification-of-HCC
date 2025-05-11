@@ -1,0 +1,179 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container" style="min-height: 100%;margin-top: 70px; height: 500px;width: 2000px;">
+        <div class="booking1 p-5">
+
+            <h3 style="text-align: center; margin-bottom: 10px; color: #cfdeec; font-weight: bold;margin-top: -40px;">
+                Prediction</h3>
+
+            {% if result %}
+            
+            <div id="flash-message-popup"
+                style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background-color: #1c8fc4; color: white; padding: 20px; border-radius: 8px; font-weight: bold; z-index: 9999; width: 90%; max-width: 900px;">
+                <h3 style="color: #ffffff; text-align: center; font-weight: bold;">Your New Value Prediction: {{ result
+                    }}</h3>
+                <button onclick="closeFlashMessage()"
+                    style="background-color: #cfdeec; color: #000; font-weight: bold; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; display: block; margin: 20px auto;">Close</button>
+
+                <!-- Create a flexbox container for two columns -->
+                <div style="display: flex; justify-content: space-between; gap: 20px; margin-top: 20px;">
+
+                    <!-- First column (Reasons for Prediction) -->
+                    <div style="flex: 1; min-width: 45%;">
+                        <h4 style="color: #ffffff; text-align: center; font-weight: bold;">Reasons for Prediction:</h4>
+                        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: left; padding: 8px; background-color: #f2f2f2;color: #000;">Category</th>
+                                    <th style="text-align: left; padding: 8px; background-color: #f2f2f2;color: #000;">Description
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for reason in reasons %}
+                                <tr style="border-color: white;">
+                                    <td style="padding: 8px;">{{ reason[0] }}</td>
+                                    <td style="padding: 8px;">{{ reason[1] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style="flex: 1; min-width: 45%;">
+                        <h4 style="color: #ffffff; text-align: center; font-weight: bold;">Diet and Tips for Better</h4>
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: left; padding: 8px; background-color: #f2f2f2;color: #000;">Tip</th>
+                                    <th style="text-align: left; padding: 8px; background-color: #f2f2f2;color: #000;">Description
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for tip in diet_tips %}
+                                <tr>
+                                    <td style="padding: 8px;">{{ tip[0] }}</td>
+                                    <td style="padding: 8px;">{{ tip[1] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div> <!-- End of flexbox container -->
+
+            </div>
+
+            <script>
+                // Automatically hide the flash message after 5 seconds
+                setTimeout(function () {
+                    document.getElementById("flash-message-popup").style.display = 'none';
+                }, 20000);
+
+                // Function to close the flash message manually
+                function closeFlashMessage() {
+                    document.getElementById("flash-message-popup").style.display = 'none';
+                }
+            </script>
+            {% endif %}
+
+            <form action="{{url_for('prediction')}}" method="post"
+                style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px;">
+
+                <!-- New fields -->
+                <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                    <label for="gender" style="font-weight: bold; color: #ffffff;">Gender:</label>
+                    <select id="gender" name="gender"
+                        style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                        required>
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>
+                        <option value="2">Other</option>
+                    </select>
+                </div>
+
+                <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                    <label for="smoking" style="font-weight: bold; color: #ffffff;">Smoking:</label>
+                    <select id="smoking" name="smoking"
+                        style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                        required>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                    <label for="afp" style="font-weight: bold; color: #fefeff;">AFP(Alpha-fetoprotein leve):</label>
+                    <input type="number" id="afp" name="afp" step="any"
+                        style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                        required>
+                </div>
+
+                <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                    <label for="hemoglobin" style="font-weight: bold; color: #ffffff;">Hemoglobin:</label>
+                    <input type="number" id="hemoglobin" name="hemoglobin" step="any"
+                        style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                        required>
+                </div>
+
+                <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                    <label for="mcv" style="font-weight: bold; color: #ffffff;">MCV(Mean Corpuscular Volume):</label>
+                    <input type="number" id="mcv" name="mcv" step="any"
+                        style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                        required>
+                </div>
+
+                <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                    <label for="albumin" style="font-weight: bold; color: #ffffff;">Albumin:</label>
+                    <input type="number" id="albumin" name="albumin" step="any"
+                        style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                        required>
+                </div>
+
+                <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                    <label for="ast" style="font-weight: bold; color: #ffffff;">AST(Aspartate aminotransferase
+                        level):</label>
+                    <input type="number" id="ast" name="ast" step="any"
+                        style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                        required>
+                </div>
+
+                <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                    <label for="alp" style="font-weight: bold; color: #ffffff;">ALP(Alkaline phosphatase level):</label>
+                    <input type="number" id="alp" name="alp" step="any"
+                        style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                        required>
+                </div>
+
+                <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                    <label for="iron" style="font-weight: bold; color: #ffffff;">Iron:</label>
+                    <input type="number" id="iron" name="iron" step="any"
+                        style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                        required>
+                </div>
+
+                <div style="flex: 1 1 30%; margin-bottom: 3px;">
+                    <label for="ferritin" style="font-weight: bold; color: #ffffff;">Ferritin:</label>
+                    <input type="number" id="ferritin" name="ferritin" step="any"
+                        style="width: 100%; height: 40px; padding: 8px; font-size: 16px; border: 1px solid #ced4da; border-radius: 5px;"
+                        required>
+                </div>
+                <!-- Submit Button -->
+                <div style="width: 100%; text-align: center; margin-top: 0px;">
+                    <button type="submit"
+                        style="width: 100%; padding: 8px; font-size: 16px; color: rgb(0, 0, 0); font-weight: bold; background-color: #1d81e6; border: none; border-radius: 10px; cursor: pointer;">Predict</button>
+                </div>
+
+            </form>
+
+        </div>
+        {% endblock %}
+
+        {% if message %}
+        <script>
+            alert("{{message}}")
+        </script>
+        {% endif %}
